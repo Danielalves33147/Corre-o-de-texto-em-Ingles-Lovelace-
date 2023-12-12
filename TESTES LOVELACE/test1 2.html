@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Correção de Texto em Inglês</title>
+</head>
+<body>
+  <h1>Correção de Texto em Inglês</h1>
+  <textarea id="inputText" rows="4" cols="50"></textarea>
+  <button onclick="corrigirTexto()">Corrigir</button>
+  <p id="outputText"></p>
+
+  <script>
+    function corrigirTexto() {
+      const texto = document.getElementById('inputText').value;
+
+      // Aqui você faria uma chamada para a API de Linguagem Natural da Microsoft Azure para corrigir o texto em inglês
+      // Você precisará de uma chave de API válida para usar o serviço
+
+      // Exemplo de chamada para a API de Linguagem Natural da Microsoft Azure (não funcional sem uma chave de API válida)
+      fetch('https://api.cognitive.microsoft.com/text/analytics/v3.0/languages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Ocp-Apim-Subscription-Key': 'SUA_CHAVE_DE_API'
+        },
+        body: JSON.stringify({ documents: [{ id: '1', text: texto }] })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const textoCorrigido = data; // Supondo que a resposta da API contenha o texto corrigido
+        document.getElementById('outputText').innerText = JSON.stringify(textoCorrigido, null, 2);
+      })
+      .catch(error => {
+        console.error('Erro ao chamar a API de correção: ', error);
+      });
+    }
+  </script>
+</body>
+</html>

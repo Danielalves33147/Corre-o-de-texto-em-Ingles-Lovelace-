@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Correção de Texto em Inglês</title>
+</head>
+<body>
+  <h1>Correção de Texto em Inglês</h1>
+  <textarea id="inputText" rows="4" cols="50"></textarea>
+  <button onclick="corrigirTexto()">Corrigir</button>
+  <p id="outputText"></p>
+
+  <script>
+    function corrigirTexto() {
+      const texto = document.getElementById('inputText').value;
+
+      // Aqui você faria uma chamada para um serviço de IA que corrige o texto em inglês
+      // Vou usar um exemplo simples usando a API do Grammarly para demonstração
+      // Você precisará de uma chave de API válida para usar o serviço
+
+      // Exemplo de chamada para a API do Grammarly (não funcional sem uma chave de API válida)
+      fetch('https://api.grammarly.com/v1/check', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer SUA_CHAVE_DE_API'
+        },
+        body: JSON.stringify({ text: texto, language: 'en' })
+      })
+      .then(response => response.json())
+      .then(data => {
+        const textoCorrigido = data.result; // Supondo que a resposta da API contenha o texto corrigido
+        document.getElementById('outputText').innerText = textoCorrigido;
+      })
+      .catch(error => {
+        console.error('Erro ao chamar a API de correção: ', error);
+      });
+    }
+  </script>
+</body>
+</html>
